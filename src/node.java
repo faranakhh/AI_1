@@ -42,9 +42,12 @@ import java.util.ArrayList;
             System.out.println();
         }
 
-        System.out.println("/////////////////////");
+        System.out.println("///////////////////////////");
 
     }
+     public void setPlace(ArrayList<ArrayList<card>> place) {
+         places = place;
+     }
 
 }
 
