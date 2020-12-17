@@ -40,6 +40,7 @@ public class question1 {
                         copyOfNode.get(j).add(lastCard1);
 
                         newNode.setPlace(copyOfNode);
+
                     }
                 }
             }
