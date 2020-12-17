@@ -42,7 +42,8 @@ import java.util.ArrayList;
             System.out.println();
         }
 
-        System.out.println("///////////////////////");
+        System.out.println("/////////////////////");
+
     }
 
 }
