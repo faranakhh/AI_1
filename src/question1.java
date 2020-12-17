@@ -42,6 +42,7 @@ public class question1 {
                         newNode.setPlace(copyOfNode);
 
                     }
+
                 }
             }
 
