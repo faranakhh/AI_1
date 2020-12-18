@@ -8,10 +8,11 @@ import java.util.ArrayList;
     {
         places = new ArrayList<>();
     }
-
+     public String action;
+     public ArrayList<String> actions = new ArrayList<>();
     public boolean expand=false ;
     int depth;
-    node father;
+    node parent;
 
     public ArrayList getAPalace(int number){
         return places.get(number);
@@ -30,7 +31,17 @@ import java.util.ArrayList;
 
     }
 
-    public void showTheStates(){
+     public ArrayList getColorOfAplace(int number){
+         ArrayList<card> arrayListOfCads = places.get(number);//get the cards in a place
+         ArrayList<String> colorOfCards = new ArrayList<>();
+
+         for (int i =0 ; i<= arrayListOfCads.size();i++){
+             colorOfCards.add(arrayListOfCads.get(i).color);
+         }
+         return colorOfCards;
+
+     }
+    public void showThePlaces(){
 
 
         for (int i = 0; i < places.size(); i++) {
@@ -42,7 +53,7 @@ import java.util.ArrayList;
             System.out.println();
         }
 
-        System.out.println("///////////////////////////");
+        System.out.println("//////////////////////////");
 
     }
      public void setPlace(ArrayList<ArrayList<card>> place) {
