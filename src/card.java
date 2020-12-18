@@ -1,15 +1,13 @@
  public class card {
 
-    public String color;
+    public char color;
     public int number;
 
-      public card(String color, int number) {
+      public card(char color, int number) {
          this.color = color;
          this.number = number;
      }
-public String getColor(){
-          return color;
-     }
+
 
 
 }

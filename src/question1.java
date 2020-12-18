@@ -8,10 +8,7 @@ public class question1 {
     public ArrayList<node> explored = new ArrayList<>();
 
 
-
-
-
-    public boolean expanding(node node , int numbers) {
+    public boolean expanding(node node, int numbers) {
         ArrayList<node> newNodes = new ArrayList<>();
         ArrayList space1;
         ArrayList space2;
@@ -44,7 +41,7 @@ public class question1 {
 
                         newNode.setPlace(copyOfNode);
 
-                        String action = lastCard1.number + "" + lastCard1.color + " moves from " + i+1 + " to " + j+1;
+                        String action = lastCard1.number + "" + lastCard1.color + " moves from " + i + " to " + j ;
                         System.out.println("new node is created : " + action);
                         System.out.println("//////////////");
                         newNode.parent = node;
@@ -62,7 +59,7 @@ public class question1 {
                             System.out.println("we had this node before!");
                         }
 
-                        if (isGoal(newNode,numbers)) {
+                        if (isGoal(newNode, numbers)) {
 
                             System.out.println("we got the goal");
                             System.out.println("answer is founded in Depth of : " + newNode.depth);
@@ -83,17 +80,16 @@ public class question1 {
                         }
 
 
-
                     }
-                    if(space2.size() != 0 && space1.size() != 0){
-                        card lastCard1 = (card) space1.get(space1.size()-1);
+                    if (space2.size() != 0 && space1.size() != 0) {
+                        card lastCard1 = (card) space1.get(space1.size() - 1);
                         card lastCard2 = (card) space2.get(space2.size() - 1);
-                        if(lastCard1.number < lastCard2.number){
+                        if (lastCard1.number < lastCard2.number) {
                             copyOfNode.get(i).remove(lastCard1);
                             copyOfNode.get(j).add(lastCard1);
                             node newNode = new node();
                             newNode.setPlace(copyOfNode);
-                            String nodeAction = lastCard1.number + "" + lastCard1.color + " moves from " + i+1 + " to " + j+1;
+                            String nodeAction = lastCard1.number + "" + lastCard1.color + " moves from " + i  + " to " + j;
                             System.out.println("new node is created: " + nodeAction);
                             System.out.println("//////////");
                             newNode.depth = node.depth + 1;
@@ -114,7 +110,7 @@ public class question1 {
                                 System.out.println("we got the goal");
                                 newNode.showThePlaces();
                                 System.out.println("answer is founded in Depth of: " + newNode.depth);
-                                System.out.println("number of actions:" +newNode.actions.size());
+                                System.out.println("number of actions:" + newNode.actions.size());
                                 for (int p = 0; p < newNode.actions.size(); p++) {
 
                                     System.out.println(newNode.actions.get(p));
@@ -128,8 +124,7 @@ public class question1 {
                                 }
 
 
-                            }
-                            else {
+                            } else {
                                 System.out.println("it is not goal");
                             }
 
@@ -153,68 +148,55 @@ public class question1 {
         return false;
     }
 
-        public  boolean isGoal(node node, int numbers){
-            String color;
-
-            boolean sorted = true;
-
-
-            for (int i = 0; i < node.places.size(); i++) {
-
-                if (node.places.get(i).size() != 0) {
-
-                    color = node.places.get(i).get(0).color;
-
-                    for (int j = 1; j < node.places.get(i).size(); j++) {
-
-                        if ((node.places.get(i).get(j).color != color)) {
-
-                            return false;
-                        }//check all the cards in a place have the same color
-
-
-                    }
-
-
-                    ArrayList copy = new ArrayList(node.getNumberOfAPlace(i));
-                    Collections.sort(copy, Collections.reverseOrder());
-                    sorted = copy.equals(node.getNumberOfAPlace(i));//three lines above check if the cards sorted in a true way and they what we wanted
-                    if (sorted == false) {
+    public boolean isGoal(node node, int numbers) {
+        char color;
+        boolean sorted = true;
+        for (int i = 0; i < node.places.size(); i++) {
+            if (node.places.get(i).size() != 0) {
+                color = node.places.get(i).get(0).color;
+                for (int j = 1; j < node.places.get(i).size(); j++) {
+                    if ((node.places.get(i).get(j).color != color)) {
                         return false;
-                    }
+                    }//check all the cards in a place have the same color
 
                 }
-
-                if (node.places.get(i).size() != 0 && node.places.get(i).size() != numbers) {
+                ArrayList copy = new ArrayList(node.getNumberOfAPlace(i));
+                Collections.sort(copy, Collections.reverseOrder());
+                sorted = copy.equals(node.getNumberOfAPlace(i));//three lines above check if the cards sorted in a true way and they what we wanted
+                if (sorted == false) {
                     return false;
                 }
 
             }
 
-            return true;
-
+            if (node.places.get(i).size() != 0 && node.places.get(i).size() != numbers) {
+                return false;
+            }
 
         }
 
+        return true;
 
-        public boolean checkRedundancy(node node) {
+
+    }
+
+
+    public boolean checkRedundancy(node node) {
 
         for (int i = 0; i < frontier.size(); i++) {
 
-           for( int j = 0; j < frontier.get(i).places.size(); j++) {
-               if ((!frontier.get(i).getNumberOfAPlace(i).equals(node.getNumberOfAPlace(i))) || (!node.getColorOfAplace(i).equals(node.getColorOfAplace(i)))) {
-                   return false;
-               }
-              else return true;
-           }
+            for (int j = 0; j < frontier.get(i).places.size(); j++) {
+                if ((!frontier.get(i).getNumberOfAPlace(i).equals(node.getNumberOfAPlace(i))) || (!node.getColorOfAplace(i).equals(node.getColorOfAplace(i)))) {
+                    return false;
+                } else return true;
+            }
         }
         for (int i = 0; i < explored.size(); i++) {
-            for (int j= 0; i < explored.get(i).places.size(); j++) {
+            for (int j = 0; i < explored.get(i).places.size(); j++) {
 
                 if ((!explored.get(i).getNumberOfAPlace(i).equals(node.getNumberOfAPlace(i))) || (!node.getColorOfAplace(i).equals(node.getColorOfAplace(i)))) {
                     return false;
-                }
-                else return true;
+                } else return true;
 
             }
 
@@ -224,14 +206,25 @@ public class question1 {
         return false;
     }
 
-    public static void main(String[] args) {
+    public void bfs(node node, int numbers) {
+        boolean temp = false;
+        boolean finish = false;
+        while (!finish) {
+            node nodeForExpanding = frontier.get(0);
 
 
-        Scanner scanner = new Scanner(System.in);
-        int numbers = scanner.nextInt();
+            frontier.remove(0);
+
+
+            explored.add(nodeForExpanding);
+
+            temp = expanding(nodeForExpanding, numbers);
+            if (temp == true) {
+                finish = true;
+                System.out.println("finish");
+            }
+        }
 
     }
+
 }
-
-
-

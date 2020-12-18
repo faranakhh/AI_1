@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
  class node {
 
-
+     public boolean initial = false;
    public ArrayList<ArrayList<card> > places;
 
     {
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
      public ArrayList getColorOfAplace(int number){
          ArrayList<card> arrayListOfCads = places.get(number);//get the cards in a place
-         ArrayList<String> colorOfCards = new ArrayList<>();
+         ArrayList<Character> colorOfCards = new ArrayList<>();
 
          for (int i =0 ; i<= arrayListOfCads.size();i++){
              colorOfCards.add(arrayListOfCads.get(i).color);
