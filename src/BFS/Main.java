@@ -103,6 +103,7 @@ class bfs_solving {
                         } else {
                             System.out.println("we had this node before!");
                         }
+
                         if (isGoal(newNode, numbers)) {
                             System.out.println("we got the goal");
                             System.out.println("answer is founded in Depth of : " + newNode.depth);
@@ -128,7 +129,8 @@ class bfs_solving {
                             node newNode = new node();
                             newNode.setPlace(copyOfNode);
                             String nodeAction = lastCard1.number + "" + lastCard1.color + " moves from " + (i+1)  + " to " + (j+1);
-                            System.out.println("new node is created: " + nodeAction);
+                            System.out.println("new node is created ");
+                            System.out.println("node action: " +nodeAction);
                             System.out.println("//////////");
                             newNode.depth = node.depth + 1;
                             newNode.action = nodeAction;
