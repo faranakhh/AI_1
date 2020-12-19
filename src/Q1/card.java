@@ -1,4 +1,6 @@
- public class card {
+package Q1;
+
+public class card {
 
     public char color;
     public int number;
