@@ -1,5 +1,3 @@
-package Q1;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,9 +7,10 @@ public class main {
 
 
         Scanner scanner = new Scanner(System.in);
-        int k = scanner.nextInt();
-        int colors = scanner.nextInt();
-        int numbers = scanner.nextInt();
+        int numbersOfRows = scanner.nextInt();
+        int numbersOfColors = scanner.nextInt();
+        int numbersOfCards = scanner.nextInt();
+
 
 
 }

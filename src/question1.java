@@ -1,5 +1,3 @@
-package Q1;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -30,19 +28,18 @@ public class question1 {
                     space1 = node.places.get(i);
                     space2 = node.places.get(j);
 
-                    if (space2.size() == 0 && space1.size() != 0) {
-
-                        node newNode = new node();
-
+                    if (space1.size() != 0 && space2.size() == 0  ) {
                         card lastCard1 = (card) space1.get(space1.size() - 1);
 
                         copyOfNode.get(i).remove(lastCard1);
 
                         copyOfNode.get(j).add(lastCard1);
 
-                        newNode.setPlace(copyOfNode);
+                        node newNode = new node();
 
-                        String action = lastCard1.number + "" + lastCard1.color + " moves from " + i + " to " + j ;
+                        newNode.setPlace(copyOfNode);//copy of above node is now new node. setPlace is a function in node class
+
+                        String action = lastCard1.number + "" + lastCard1.color + " moves from " + (i+1) + " to " + (j+1) ;
                         System.out.println("new node is created : " + action);
                         System.out.println("//////////////");
                         newNode.parent = node;
@@ -90,7 +87,7 @@ public class question1 {
                             copyOfNode.get(j).add(lastCard1);
                             node newNode = new node();
                             newNode.setPlace(copyOfNode);
-                            String nodeAction = lastCard1.number + "" + lastCard1.color + " moves from " + i  + " to " + j;
+                            String nodeAction = lastCard1.number + "" + lastCard1.color + " moves from " + (i+1)  + " to " + (j+1);
                             System.out.println("new node is created: " + nodeAction);
                             System.out.println("//////////");
                             newNode.depth = node.depth + 1;
@@ -115,8 +112,7 @@ public class question1 {
                                 for (int p = 0; p < newNode.actions.size(); p++) {
 
                                     System.out.println(newNode.actions.get(p));
-                                    int created = frontier.size() + explored.size();
-                                    System.out.println("number of created nodes:" + created);
+                                    System.out.println("number of created nodes:" + frontier.size() + explored.size());
                                     System.out.println("Frontier size : " + frontier.size());
                                     System.out.println("Expanded nodes: " + explored.size());
                                     return true;
@@ -139,13 +135,9 @@ public class question1 {
 
         }
 
-
         System.out.println("expanded");
         System.out.println("_________");
-
-
         node.expand = true;
-
         return false;
     }
 
