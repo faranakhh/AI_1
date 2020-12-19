@@ -2,28 +2,21 @@ package BFS;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 
-class card {
-
+ class card {
     public char color;
     public int number;
-
     public card(char color, int number) {
         this.color = color;
         this.number = number;
     }
-
-
-
 }
-
-
+//////////////////////////////////////////////////
 class node {
-
-    public boolean initial = false;
+   public boolean selected = false;
     public ArrayList<ArrayList<card>> places;
-
     {
         places = new ArrayList<>();
     }
@@ -32,10 +25,8 @@ class node {
     public boolean expand=false ;
     int depth;
     node parent;
-
     public ArrayList getAPalace(int number){
         return places.get(number);
-
     }
     //return the cards in a special place
 
@@ -47,7 +38,6 @@ class node {
             numbersOfCards.add(arrayListOfCads.get(i).number);
         }
         return numbersOfCards;
-
     }
 
     public ArrayList getColorOfAplace(int number){
@@ -58,50 +48,33 @@ class node {
             colorOfCards.add(arrayListOfCads.get(i).color);
         }
         return colorOfCards;
-
     }
     public void showThePlaces(){
-
-
         for (int i = 0; i < places.size(); i++) {
-
             for (int j = 0; j < places.get(i).size(); j++) {
-
                 System.out.print(places.get(i).get(j));
             }
             System.out.println();
         }
-
         System.out.println("//////////////////////////");
-
     }
     public void setPlace(ArrayList<ArrayList<card>> place) {
         places = place;
     }
-
 }
 
-
-class question1 {
-
+////////////////////////////////
+class bfs_solving {
     public ArrayList<node> frontier = new ArrayList<>();
     public ArrayList<node> explored = new ArrayList<>();
-
-
     public boolean expanding(node node, int numbers) {
         ArrayList<node> newNodes = new ArrayList<>();
         ArrayList space1;
         ArrayList space2;
-
-
         for (int i = 0; i < node.places.size(); i++) {
-
             for (int j = 0; j < node.places.size(); j++) {
-
                 ArrayList<ArrayList<card>> copyOfNode = new ArrayList<>();
-
                 for (ArrayList<card> aPlace : node.places) {
-
                     copyOfNode.add((ArrayList<card>) aPlace.clone());
                 }
 
@@ -111,15 +84,10 @@ class question1 {
 
                     if (space1.size() != 0 && space2.size() == 0  ) {
                         card lastCard1 = (card) space1.get(space1.size() - 1);
-
                         copyOfNode.get(i).remove(lastCard1);
-
                         copyOfNode.get(j).add(lastCard1);
-
                         node newNode = new node();
-
                         newNode.setPlace(copyOfNode);//copy of above node is now new node. setPlace is a function in node class
-
                         String action = lastCard1.number + "" + lastCard1.color + " moves from " + (i+1) + " to " + (j+1) ;
                         System.out.println("new node is created : " + action);
                         System.out.println("//////////////");
@@ -130,35 +98,26 @@ class question1 {
                         newNode.actions.add(action);
                         newNode.showThePlaces();
                         if (!checkRedundancy(newNode)) {
-
                             frontier.add(newNode);
                             newNodes.add(newNode);
                         } else {
-
                             System.out.println("we had this node before!");
                         }
-
                         if (isGoal(newNode, numbers)) {
-
                             System.out.println("we got the goal");
                             System.out.println("answer is founded in Depth of : " + newNode.depth);
                             System.out.println("number of actions:" + newNode.actions.size());
                             for (int p = 0; p < newNode.actions.size(); p++) {
-
                                 System.out.println(newNode.actions.get(p));
                             }
                             int created = frontier.size() + explored.size();
                             System.out.println("created nodes:" + created);
                             System.out.println("Frontier size : " + frontier.size());
                             System.out.println("Expanded nodes: " + explored.size());
-
-
                             return true;
                         } else {
                             System.out.println("it is not goal yet");
                         }
-
-
                     }
                     if (space2.size() != 0 && space1.size() != 0) {
                         card lastCard1 = (card) space1.get(space1.size() - 1);
@@ -197,20 +156,12 @@ class question1 {
                                     System.out.println("Frontier size : " + frontier.size());
                                     System.out.println("Expanded nodes: " + explored.size());
                                     return true;
-
-
                                 }
-
-
                             } else {
                                 System.out.println("it is not goal");
                             }
-
-
                         }
                     }
-
-
                 }
             }
 
@@ -248,10 +199,7 @@ class question1 {
             }
 
         }
-
         return true;
-
-
     }
 
 
@@ -273,32 +221,23 @@ class question1 {
                 } else return true;
 
             }
-
-
         }
-
         return false;
     }
 
-    public void bfs(node node, int numbers) {
+    public void my_bfs(node node, int numbers) {
         boolean temp = false;
         boolean finish = false;
         while (!finish) {
             node nodeForExpanding = frontier.get(0);
-
-
             frontier.remove(0);
-
-
             explored.add(nodeForExpanding);
-
             temp = expanding(nodeForExpanding, numbers);
             if (temp == true) {
                 finish = true;
                 System.out.println("finish");
             }
         }
-
     }
 
 }
@@ -311,7 +250,38 @@ public class Main {
         int numbersOfRows = scanner.nextInt();
         int numbersOfColors = scanner.nextInt();
         int numberOfCards = scanner.nextInt();
-
+        ArrayList primaryInput;
+        {
+            primaryInput =new ArrayList();}
+        bfs_solving solving = new bfs_solving();
+        node firstNode = new node();
+        firstNode.depth = 0;
+        for (int i = 0; i <= numbersOfRows; i++) {
+            String input = scanner.nextLine();
+            primaryInput.add(input);
+        }
+        primaryInput.remove(0);
+        ArrayList<ArrayList<card>> places ;{
+            places =new ArrayList<>();}
+        for (int m = 0; m < numbersOfRows; m++) {
+            ArrayList<card> place = new ArrayList();
+            String string = (String) primaryInput.get(m);
+            String[] ready = string.split("\\s+");
+            for (int n = 0; n < ready.length; n++) {
+                String aCard = ready[n];
+                if (aCard!="#") {
+                    int number = Integer.parseInt(String.valueOf(aCard.charAt(0)));
+                    char color = aCard.charAt(1);
+                    card card = new card(color, number);
+                    place.add(card);
+                }
+            }
+            places.add(place);
+        }
+        firstNode.places = places;
+        firstNode.selected = true;
+        solving.frontier.add(firstNode);
+        solving.my_bfs(firstNode, numberOfCards);
 
     }
 

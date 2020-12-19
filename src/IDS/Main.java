@@ -1,9 +1,31 @@
+package IDS;
+
 import java.util.ArrayList;
 
-class node {
+class card {
+
+    public char color;
+    public int number;
+
+    public card(char color, int number) {
+        this.color = color;
+        this.number = number;
+    }
+    public int getNumber() {
+        return number;
+    }
+
+    public char getColor() {
+        return color;
+    }
+
+
+
+}
+class node{
 
     public boolean initial = false;
-    public ArrayList<ArrayList<card> > places;
+    public ArrayList<ArrayList<card>> places;
 
     {
         places = new ArrayList<>();
@@ -13,6 +35,13 @@ class node {
     public boolean expand=false ;
     int depth;
     node parent;
+
+    public int getDepth(){
+        return depth;
+    }
+    public node getParent(){
+        return parent;
+    }
 
     public ArrayList getAPalace(int number){
         return places.get(number);
@@ -60,4 +89,17 @@ class node {
         places = place;
     }
 
+}
+class ids_solving{
+    public ArrayList<node> frontier = new ArrayList<>();
+    public ArrayList<node> explored = new ArrayList<>();
+
+}
+
+
+
+
+
+
+public class Main {
 }
