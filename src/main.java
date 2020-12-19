@@ -9,8 +9,7 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         int numbersOfRows = scanner.nextInt();
         int numbersOfColors = scanner.nextInt();
-        int numbersOfCards = scanner.nextInt();
-
+        int numberOfCards = scanner.nextInt();
 
 
 }
